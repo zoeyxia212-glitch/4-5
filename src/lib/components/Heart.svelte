@@ -1,4 +1,8 @@
 <script>
+  // ==============================
+  // 功能：爱心图标组件（收藏按钮用）
+  // 对应 Exercise Two - Sharing state between components
+  // ==============================
   let { isFilled = false, color = "#ddd" } = $props();
 </script>
 

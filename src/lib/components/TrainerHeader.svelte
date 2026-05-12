@@ -1,6 +1,9 @@
 <script>
+  // ==============================
+  // Exercise Four - 训练师详情头部
+  // 显示训练师大图、名字、等级
+  // ==============================
   import { PUBLIC_BASE_URL } from "$env/static/public";
-
   let { trainer } = $props();
 </script>
 
@@ -51,7 +54,6 @@
     font-size: 3rem;
     font-weight: 700;
     margin: 0 0 1rem 0;
-    line-height: 1.1;
   }
 
   .trainer-rank {
@@ -62,56 +64,22 @@
     padding: 0.5rem 1rem;
     background: #e8f5e8;
     border-radius: 25px;
-    display: inline-block;
-    width: fit-content;
   }
 
   .trainer-id {
     color: #757575;
     font-size: 1.1rem;
-    font-weight: 500;
     margin: 0 0 2rem 0;
-    letter-spacing: 0.5px;
   }
 
   .back-link {
     color: #4caf50;
     text-decoration: none;
     font-weight: 500;
-    font-size: 1.1rem;
-    transition: color 0.2s ease;
   }
 
   .back-link:hover {
     color: #2e7d32;
     text-decoration: underline;
-  }
-
-  @media (max-width: 768px) {
-    .trainer-header {
-      flex-direction: column;
-      text-align: center;
-      gap: 2rem;
-      padding: 1.5rem;
-    }
-
-    .trainer-image img {
-      width: 150px;
-      height: 150px;
-    }
-
-    .trainer-name {
-      font-size: 2.5rem;
-    }
-
-    .trainer-rank {
-      font-size: 1.3rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .trainer-name {
-      font-size: 2rem;
-    }
   }
 </style>

@@ -1,19 +1,40 @@
 <script>
+  // ================================================================================
+  // Exercise One - SvelteKit data loading
+  // 题目要求：
+  // Next, within /trainers/+layout.svelte, add a new prop, called data:
+  // let { data } = $props();
+  // 
+  // data 来自 +layout.js 的 load() 函数返回值，包含：
+  // - data.trainers  所有训练师数据
+  // - data.error     错误信息（如果有）
+  //
+  // 使用这份 data 渲染侧边栏，删除组件内原本的 fetch() 调用
+  // ================================================================================
+
   import { page } from "$app/state";
   import { favouriteTrainerStore } from "$lib/js/favourite-trainer.svelte.js";
 
+  // 题目要求：接收从 +layout.js load() 传来的 data
   let { data, children } = $props();
 
+  // 从 data 中取出训练师列表与错误信息
   let trainers = $derived(data.trainers || []);
   let error = $derived(data.error);
+
+  // 当前选中的训练师 ID（用于高亮）
   let currentTrainerId = $derived(page.params.trainerId);
 </script>
 
 <div class="trainers-layout">
   <aside class="sidebar">
     <h2>Trainers</h2>
+
+    <!-- 错误状态 -->
     {#if error}
       <p class="error">Failed to load trainers</p>
+    
+    <!-- 成功显示训练师列表 -->
     {:else if trainers.length > 0}
       <nav class="trainer-nav">
         <ul>
@@ -38,11 +59,14 @@
           {/each}
         </ul>
       </nav>
+    
+    <!-- 无数据 -->
     {:else}
       <p class="no-trainers">No trainers found</p>
     {/if}
   </aside>
 
+  <!-- 渲染子页面（trainers 列表 / 详情页） -->
   <main class="main-content">
     {@render children()}
   </main>
@@ -51,7 +75,7 @@
 <style>
   .trainers-layout {
     display: flex;
-    min-height: calc(100vh - 120px); /* Adjust for navbar height */
+    min-height: calc(100vh - 120px);
     gap: 2rem;
     max-width: 1400px;
     margin: 0 auto;
@@ -145,7 +169,7 @@
 
   .main-content {
     flex: 1;
-    min-width: 0; /* Prevents flex items from overflowing */
+    min-width: 0;
   }
 
   @media (max-width: 1024px) {

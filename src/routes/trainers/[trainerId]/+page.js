@@ -1,3 +1,8 @@
+// ==============================
+// Exercise One - 动态路由数据加载
+// 根据路由参数 trainerId 获取单个训练师详情
+// 对应题目：从 /api/trainers/{trainerId} 获取数据
+// ==============================
 import { PUBLIC_BASE_URL } from "$env/static/public";
 
 export async function load({ fetch, params }) {

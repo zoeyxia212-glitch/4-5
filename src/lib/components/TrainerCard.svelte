@@ -1,4 +1,9 @@
 <script>
+  // ==============================
+  // Exercise Three：单个训练师卡片
+  // Exercise Four：点击跳转详情页 /trainers/[trainerId]
+  // Exercise Two：收藏功能（共享状态）
+  // ==============================
   import { PUBLIC_BASE_URL } from "$env/static/public";
   import { goto } from "$app/navigation";
   import { favouriteTrainerStore } from "$lib/js/favourite-trainer.svelte.js";
@@ -7,10 +12,12 @@
   let { trainer } = $props();
   let isFavourite = $derived(favouriteTrainerStore.trainerId === trainer?.trainerId);
 
+  // 点击卡片跳转详情
   function handleCardClick() {
     goto(`/trainers/${trainer.trainerId}`);
   }
 
+  // 键盘支持
   function handleKeydown(event) {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
@@ -18,6 +25,7 @@
     }
   }
 
+  // 点击爱心切换收藏
   function handleFavouriteButtonClick(event) {
     event.stopPropagation();
     if (isFavourite) {
@@ -41,7 +49,8 @@
   </div>
   <div class="card-content">
     <h3 class="trainer-name">
-      {trainer.name}&nbsp;<button
+      {trainer.name}
+      <button
         class="heart-button {isFavourite ? 'favorite' : ''}"
         onclick={handleFavouriteButtonClick}
         aria-label={isFavourite ? "Remove from favorites" : "Add to favorites"}
@@ -51,7 +60,6 @@
     </h3>
     <p class="trainer-rank">{trainer.rank}</p>
     <p class="trainer-id">ID: {trainer.trainerId}</p>
-    <!-- Hidden link for semantic navigation and SEO -->
     <a href="/trainers/{trainer.trainerId}" class="sr-only">View {trainer.name} details</a>
   </div>
 </div>
@@ -60,115 +68,28 @@
   .trainer-card {
     background: white;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     overflow: hidden;
     transition: all 0.3s ease;
-    position: relative;
     cursor: pointer;
   }
-
-  .trainer-card:focus {
-    outline: 2px solid #4caf50;
-    outline-offset: 2px;
-  }
-
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
   .trainer-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
   }
-
   .card-image {
     width: 100%;
     height: 250px;
     overflow: hidden;
     background: linear-gradient(45deg, #f5f5f5, #e8f5e8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
-
   .card-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
   }
-
-  .trainer-card:hover .card-image img {
-    transform: scale(1.05);
-  }
-
-  .card-content {
-    padding: 1.5rem;
-  }
-
-  .trainer-name {
-    margin: 0 0 0.5rem 0;
-    color: #2e7d32;
-    font-size: 1.5rem;
-    font-weight: 600;
-    line-height: 1.2;
-  }
-
-  .trainer-rank {
-    margin: 0 0 1rem 0;
-    color: #4caf50;
-    font-size: 1.1rem;
-    font-weight: 500;
-    padding: 0.25rem 0.75rem;
-    background: #e8f5e8;
-    border-radius: 20px;
-    display: inline-block;
-  }
-
-  .trainer-id {
-    margin: 0;
-    color: #757575;
-    font-size: 0.9rem;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-  }
-
-  .heart-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    padding: 0.2rem;
-    margin-left: 0.5rem;
-    border-radius: 4px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .heart-button:hover {
-    transform: scale(1.1);
-  }
-
-  .heart-button.favorite:hover {
-    transform: scale(1.15);
-  }
-
-  @media (max-width: 768px) {
-    .card-content {
-      padding: 1rem;
-    }
-
-    .trainer-name {
-      font-size: 1.3rem;
-    }
-  }
+  .card-content { padding: 1.5rem; }
+  .trainer-name { color: #2e7d32; font-size: 1.5rem; }
+  .trainer-rank { color: #4caf50; }
+  .heart-button { background: none; border: none; cursor: pointer; }
 </style>

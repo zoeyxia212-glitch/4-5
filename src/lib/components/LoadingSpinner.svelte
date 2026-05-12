@@ -1,4 +1,8 @@
 <script>
+  // ==============================
+  // 功能：通用加载动画组件
+  // 用于 Exercise 3 / 4 / 5 数据加载时显示
+  // ==============================
   let { text = "Loading..." } = $props();
 </script>
 
@@ -27,12 +31,8 @@
   }
 
   @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
 
   .loading p {

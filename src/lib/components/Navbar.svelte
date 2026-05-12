@@ -1,9 +1,13 @@
 <script>
+  // ==============================
+  // Exercise Two - Shared navbar
+  // 全局导航栏，所有页面共享
+  // 根据当前路径高亮对应菜单
+  // ==============================
   import { page } from "$app/state";
   let path = $derived(page.url.pathname);
 </script>
 
-<!-- Material UI style navbar with green color scheme -->
 <nav class="navbar">
   <div class="nav-container">
     <div class="nav-brand">
@@ -20,7 +24,6 @@
 </nav>
 
 <style>
-  /* Material UI style navbar with green color scheme */
   .navbar {
     background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

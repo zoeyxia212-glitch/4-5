@@ -1,4 +1,8 @@
 <script>
+  // ==============================
+  // 全局根布局
+  // Exercise Two：导航栏在这里
+  // ==============================
   import "$lib/css/app.css";
   import Navbar from "$lib/components/Navbar.svelte";
 
@@ -15,9 +19,8 @@
   .container {
     width: 1200px;
     margin: 0 auto;
-
-    @media (max-width: 1200px) {
-      width: 100%;
-    }
+  }
+  @media (max-width: 1200px) {
+    width: 100%;
   }
 </style>
